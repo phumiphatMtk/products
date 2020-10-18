@@ -4,10 +4,15 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import "./index.scss";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 
 import App from "./App";
 
 import * as serviceWorker from "./serviceWorker";
+
+library.add(fab, fas);
 
 const rootElement = document.getElementById("root");
 
