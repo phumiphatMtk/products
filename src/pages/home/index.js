@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { increment, decrement } from "../../redux/actions";
+import { Button } from "react-bootstrap";
 
 class index extends Component {
   constructor(props) {
@@ -10,8 +11,12 @@ class index extends Component {
     return (
       <div>
         <h1>Count test {this.props.counter}</h1>
-        <button onClick={() => this.props.setIncrement(5)}>+</button>
-        <button onClick={() => this.props.setDecrement()}>-</button>
+        <Button variant="primary" onClick={() => this.props.setIncrement(5)}>
+          +
+        </Button>{" "}
+        <Button variant="primary" onClick={() => this.props.setDecrement()}>
+          -
+        </Button>{" "}
       </div>
     );
   }
