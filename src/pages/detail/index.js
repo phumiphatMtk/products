@@ -20,6 +20,10 @@ export default class index extends Component {
     });
   }
 
+  gotoHome() {
+      window.location.href = '/';
+  }
+
   render() {
     return (
       <div className="my-5 detail">
@@ -43,9 +47,10 @@ export default class index extends Component {
                   </div>
                 </div>
               </div>
-              <Button variant="secondary" className="mt-3">
-                Add to Cart
-              </Button>
+              <div className="mt-3">
+                <Button variant="secondary" className="mr-3">Add to Cart</Button>
+                <Button variant="primary" onClick={this.gotoHome}>Back to product list</Button>
+              </div>
             </Col>
           </Row>
         </Container>
