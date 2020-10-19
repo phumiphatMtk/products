@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { increment, decrement, grid, list } from "../../redux/actions";
+import { grid, list } from "../../redux/actions";
 import { Button, Container, Card, Row, Col, Image } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./home.scss";
@@ -36,6 +35,12 @@ class index extends Component {
     return (
       <div className="my-5">
         <Container>
+          <div className="box-cart">
+            <Button variant="primary" className="mr-3">
+              <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
+            </Button>
+            <span className="num-cart">10</span>
+          </div>
           <div align="right" className="my-3">
             <Button
               variant={this.props.view ? "secondary" : "default"}
@@ -103,7 +108,12 @@ class index extends Component {
                   <Col align="right">
                     <div className="text-price">฿{item.price}</div>
                     <br />
-                    <Button variant="secondary" onClick={() => this.gotoDetail(item._id)}>Detail</Button>
+                    <Button
+                      variant="secondary"
+                      onClick={() => this.gotoDetail(item._id)}
+                    >
+                      Detail
+                    </Button>
                   </Col>
                 </Row>
               ))}
@@ -124,12 +134,6 @@ const mapStatetoProps = (state) => {
 
 const mapDispatchtoProps = (dispatch) => {
   return {
-    setIncrement: (nr) => {
-      dispatch(increment(nr));
-    },
-    setDecrement: (nr) => {
-      dispatch(decrement(nr));
-    },
     grid: () => {
       dispatch(grid());
     },
