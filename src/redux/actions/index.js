@@ -10,3 +10,15 @@ export const decrement = () => {
     type: "DECREMENT",
   };
 };
+
+export const grid = () => {
+  return {
+    type: "GRID",
+  };
+};
+
+export const list = () => {
+  return {
+    type: "LIST",
+  };
+};

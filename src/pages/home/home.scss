@@ -1,5 +1,6 @@
 .card {
   color: #333;
+  height: 30rem;
   &:hover {
     -webkit-box-shadow: 0px 0px 20px 0px rgba(128, 128, 128, 1);
     -moz-box-shadow: 0px 0px 20px 0px rgba(128, 128, 128, 1);
@@ -11,5 +12,29 @@
   .text-price {
     text-align: right;
     font-weight: bold;
+  }
+}
+
+.list {
+  .box-products {
+    padding: 20px;
+    &:hover {
+      -webkit-box-shadow: 0px 0px 20px 0px rgba(128, 128, 128, 1);
+      -moz-box-shadow: 0px 0px 20px 0px rgba(128, 128, 128, 1);
+      box-shadow: 0px 0px 20px 0px rgba(128, 128, 128, 1);
+    }
+    .box-img {
+      background-color: #fff;
+      border: solid 1px #ddd;
+      padding: 10px;
+    }
+    .content {
+      color: #6c757d;
+    }
+    .text-price {
+      text-align: right;
+      font-weight: bold;
+      color: #6c757d;
+    }
   }
 }

@@ -1,141 +1,114 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { increment, decrement } from "../../redux/actions";
-import { Button, Container, Card, Row, Col } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { increment, decrement, grid, list } from "../../redux/actions";
+import { Button, Container, Card, Row, Col, Image } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./home.scss";
+import { getMethod } from "../../service";
 
 class index extends Component {
+  state = {
+    products: [],
+  };
+
   constructor(props) {
     super(props);
   }
+
+  componentDidMount() {
+    this.getProducts();
+  }
+
+  getProducts() {
+    const url = "https://cc-mock-api.herokuapp.com/product";
+    getMethod(url).then((response) => {
+      const products = response.data;
+      this.setState({ products });
+    });
+  }
+
+  gotoDetail = (id) => {
+    window.location.href = "/" + id;
+  };
+
   render() {
     return (
       <div className="my-5">
-        {/* <FontAwesomeIcon icon={["fas", "coffee"]} />
-        <h1>Count test {this.props.counter}</h1>
-        <Button variant="primary" onClick={() => this.props.setIncrement(5)}>
-          +
-        </Button>{" "}
-        <Button variant="primary" onClick={() => this.props.setDecrement()}>
-          -
-        </Button>{" "} */}
         <Container>
-          <div align="right" class="my-3">
-            <Button variant="secondary" className="mr-3">
+          <div align="right" className="my-3">
+            <Button
+              variant={this.props.view ? "secondary" : "default"}
+              className="mr-3"
+              onClick={() => this.props.grid()}
+            >
               <FontAwesomeIcon icon={["fas", "th-large"]} />
             </Button>
-            <Button variant="secondary">
+            <Button
+              variant={this.props.view ? "default" : "secondary"}
+              onClick={() => this.props.list()}
+            >
               <FontAwesomeIcon icon={["fas", "list-ul"]} />
             </Button>
           </div>
-          <Row>
-            <Col lg={3} className="mt-3">
-              <Card className="card">
-                <Card.Img
-                  variant="top"
-                  src="https://freepik.cdnpk.net/img/logo-fb-en.png"
-                />
-                <Card.Body>
-                  <Card.Title>
-                    <h5>Garmin vivosport</h5>
-                  </Card.Title>
-                  <Card.Text>
-                    Garmin vivosport สายรัดข้อมือเพื่อสุขภาพ สี 3 สี
-                    เติมเต็มสไตล์
-                    <div className="text-price mt-3">฿7,191.00</div>
-                  </Card.Text>
-                  <Button variant="secondary" block>
-                    Detail
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col lg={3} className="mt-3">
-              <Card className="card">
-                <Card.Img
-                  variant="top"
-                  src="https://freepik.cdnpk.net/img/logo-fb-en.png"
-                />
-                <Card.Body>
-                  <Card.Title>
-                    <h5>Garmin vivosport</h5>
-                  </Card.Title>
-                  <Card.Text>
-                    Garmin vivosport สายรัดข้อมือเพื่อสุขภาพ สี 3 สี
-                    เติมเต็มสไตล์
-                    <div className="text-price mt-3">฿7,191.00</div>
-                  </Card.Text>
-                  <Button variant="secondary" block>
-                    Detail
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col lg={3} className="mt-3">
-              <Card className="card">
-                <Card.Img
-                  variant="top"
-                  src="https://freepik.cdnpk.net/img/logo-fb-en.png"
-                />
-                <Card.Body>
-                  <Card.Title>
-                    <h5>Garmin vivosport</h5>
-                  </Card.Title>
-                  <Card.Text>
-                    Garmin vivosport สายรัดข้อมือเพื่อสุขภาพ สี 3 สี
-                    เติมเต็มสไตล์
-                    <div className="text-price mt-3">฿7,191.00</div>
-                  </Card.Text>
-                  <Button variant="secondary" block>
-                    Detail
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col lg={3} className="mt-3">
-              <Card className="card">
-                <Card.Img
-                  variant="top"
-                  src="https://freepik.cdnpk.net/img/logo-fb-en.png"
-                />
-                <Card.Body>
-                  <Card.Title>
-                    <h5>Garmin vivosport</h5>
-                  </Card.Title>
-                  <Card.Text>
-                    Garmin vivosport สายรัดข้อมือเพื่อสุขภาพ สี 3 สี
-                    เติมเต็มสไตล์
-                    <div className="text-price mt-3">฿7,191.00</div>
-                  </Card.Text>
-                  <Button variant="secondary" block>
-                    Detail
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col lg={3} className="mt-3">
-              <Card className="card">
-                <Card.Img
-                  variant="top"
-                  src="https://freepik.cdnpk.net/img/logo-fb-en.png"
-                />
-                <Card.Body>
-                  <Card.Title>
-                    <h5>Garmin vivosport</h5>
-                  </Card.Title>
-                  <Card.Text>
-                    Garmin vivosport สายรัดข้อมือเพื่อสุขภาพ สี 3 สี
-                    เติมเต็มสไตล์
-                    <div className="text-price mt-3">฿7,191.00</div>
-                  </Card.Text>
-                  <Button variant="secondary" block>
-                    Detail
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+          <hr />
+          {this.props.view ? (
+            <div className="grid">
+              <Row>
+                {this.state.products.map((item, index) => (
+                  <Col lg={3} className="mt-3" key={index}>
+                    <Card>
+                      <Card.Img
+                        variant="top"
+                        src={item.image_url}
+                        width="200"
+                        height="200"
+                      />
+                      <Card.Body>
+                        <Card.Title>
+                          <h5>{item.name.substring(0, 15) + "..."}</h5>
+                        </Card.Title>
+                        <Card.Text>
+                          {item.description.substring(0, 100) + "..."}
+                        </Card.Text>
+                        <Card.Text className="text-price mt-3">
+                          ฿{item.price}
+                        </Card.Text>
+                        <Button
+                          variant="secondary"
+                          block
+                          onClick={() => this.gotoDetail(item._id)}
+                        >
+                          Detail
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          ) : (
+            <div className="list">
+              {this.state.products.map((item, index) => (
+                <Row className="box-products" key={index}>
+                  <Col>
+                    <div className="box-img">
+                      <Image src={item.image_url} rounded width="200" />
+                    </div>
+                  </Col>
+                  <Col xs={8}>
+                    <h5 className="title">{item.name}</h5>
+                    <p className="content">{item.description}</p>
+                  </Col>
+                  <Col align="right">
+                    <div className="text-price">฿{item.price}</div>
+                    <br />
+                    <Button variant="secondary" onClick={() => this.gotoDetail(item._id)}>Detail</Button>
+                  </Col>
+                </Row>
+              ))}
+            </div>
+          )}
         </Container>
       </div>
     );
@@ -145,6 +118,7 @@ class index extends Component {
 const mapStatetoProps = (state) => {
   return {
     counter: state.counter,
+    view: state.view,
   };
 };
 
@@ -155,6 +129,12 @@ const mapDispatchtoProps = (dispatch) => {
     },
     setDecrement: (nr) => {
       dispatch(decrement(nr));
+    },
+    grid: () => {
+      dispatch(grid());
+    },
+    list: () => {
+      dispatch(list());
     },
   };
 };
