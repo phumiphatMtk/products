@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { grid, list } from "../../redux/actions";
 import { Button, Container, Card, Row, Col, Image } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -79,13 +80,11 @@ class index extends Component {
                         <Card.Text className="text-price mt-3">
                           ฿{item.price}
                         </Card.Text>
-                        <Button
-                          variant="secondary"
-                          block
-                          onClick={() => this.gotoDetail(item._id)}
-                        >
-                          Detail
-                        </Button>
+                        <Link to={`/` + item._id}>
+                          <Button variant="secondary" block>
+                            Detail
+                          </Button>
+                        </Link>
                       </Card.Body>
                     </Card>
                   </Col>
@@ -108,12 +107,9 @@ class index extends Component {
                   <Col align="right">
                     <div className="text-price">฿{item.price}</div>
                     <br />
-                    <Button
-                      variant="secondary"
-                      onClick={() => this.gotoDetail(item._id)}
-                    >
-                      Detail
-                    </Button>
+                    <Link to={`/` + item._id}>
+                      <Button variant="secondary">Detail</Button>
+                    </Link>
                   </Col>
                 </Row>
               ))}

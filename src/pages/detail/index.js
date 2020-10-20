@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Container, Row, Col, Image } from "react-bootstrap";
 import { getMethod } from "../../service";
+import { Link } from "react-router-dom";
 import "./detail.scss";
 
 export default class index extends Component {
@@ -20,9 +21,9 @@ export default class index extends Component {
     });
   }
 
-  gotoHome() {
-      window.location.href = '/';
-  }
+  // gotoHome() {
+  //   window.location.href = "/";
+  // }
 
   render() {
     return (
@@ -48,8 +49,14 @@ export default class index extends Component {
                 </div>
               </div>
               <div className="mt-3">
-                <Button variant="secondary" className="mr-3">Add to Cart</Button>
-                <Button variant="primary" onClick={this.gotoHome}>Back to product list</Button>
+                <Button variant="secondary" className="mr-3">
+                  Add to Cart
+                </Button>
+                <Link to="/">
+                  <Button variant="primary">
+                    Back to product list
+                  </Button>
+                </Link>
               </div>
             </Col>
           </Row>
