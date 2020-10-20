@@ -37,14 +37,16 @@ class index extends Component {
       <div className="my-5">
         <Container>
           <div className="box-cart">
-            <Button variant="primary" className="mr-3">
-              <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
-            </Button>
-            {this.props.cart.length > 0 ? (
-              <span className="num-cart">{this.props.cart.length}</span>
-            ) : (
-              ""
-            )}
+            <Link to="/cart">
+              <Button variant="primary" className="mr-3">
+                <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
+              </Button>
+              {this.props.cart.length > 0 ? (
+                <span className="num-cart">{this.props.cart.length}</span>
+              ) : (
+                ""
+              )}
+            </Link>
           </div>
           <div align="right" className="my-3">
             <Button
@@ -84,7 +86,7 @@ class index extends Component {
                         <Card.Text className="text-price mt-3">
                           ฿{item.price}
                         </Card.Text>
-                        <Link to={`/` + item._id}>
+                        <Link to={`/product/` + item._id}>
                           <Button variant="secondary" block>
                             Detail
                           </Button>
@@ -111,7 +113,7 @@ class index extends Component {
                   <Col align="right">
                     <div className="text-price">฿{item.price}</div>
                     <br />
-                    <Link to={`/` + item._id}>
+                    <Link to={`/product/` + item._id}>
                       <Button variant="secondary">Detail</Button>
                     </Link>
                   </Col>
