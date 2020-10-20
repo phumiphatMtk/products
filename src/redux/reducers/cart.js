@@ -3,7 +3,7 @@ const cartReducer = (state = [], action) => {
     case "ADDCART":
       return [...state, action.payload];
     case "REMOVE":
-      return [action.payload];
+      return (state = action.payload);
     default:
       return state;
   }

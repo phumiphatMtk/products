@@ -38,6 +38,12 @@ class index extends Component {
     }
   };
 
+  addcart = () => {
+    this.props.cart(this.state.data);
+    alert('add item successfully');
+    window.location.href = '/';
+  }
+
   render() {
     const props = this.state.data;
     return (
@@ -70,7 +76,7 @@ class index extends Component {
                 <Button
                   variant="secondary"
                   className="mr-3"
-                  onClick={() => this.props.cart(this.state.data)}
+                  onClick={this.addcart}
                 >
                   Add to Cart
                 </Button>
