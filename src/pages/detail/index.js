@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Button, Container, Row, Col, Image } from "react-bootstrap";
+import { connect } from "react-redux";
 import { getMethod } from "../../service";
 import { Link } from "react-router-dom";
 import "./detail.scss";
+import { addcart } from "../../redux/actions";
 
-export default class index extends Component {
+class index extends Component {
   state = {
     data: {},
   };
@@ -32,9 +34,6 @@ export default class index extends Component {
     const data = this.state.data;
     if (data.num >= 1) {
       data.num = data.num - 1;
-      this.setState({ data });
-    } else {
-      data.num = data.num;
       this.setState({ data });
     }
   };
@@ -68,7 +67,11 @@ export default class index extends Component {
                 </div>
               </div>
               <div className="mt-3">
-                <Button variant="secondary" className="mr-3">
+                <Button
+                  variant="secondary"
+                  className="mr-3"
+                  onClick={() => this.props.cart(this.state.data)}
+                >
                   Add to Cart
                 </Button>
                 <Link to="/">
@@ -82,3 +85,13 @@ export default class index extends Component {
     );
   }
 }
+
+const mapDispatchtoProps = (dispatch) => {
+  return {
+    cart: (data) => {
+      dispatch(addcart(data));
+    },
+  };
+};
+
+export default connect(null, mapDispatchtoProps)(index);

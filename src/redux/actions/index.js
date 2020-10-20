@@ -22,3 +22,10 @@ export const list = () => {
     type: "LIST",
   };
 };
+
+export const addcart = (data) => {
+  return {
+    type: "ADDCART",
+    payload: data,
+  };
+};
