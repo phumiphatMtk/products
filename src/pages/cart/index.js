@@ -14,8 +14,9 @@ class index extends Component {
   }
 
   deleItem = (index) => {
-    console.log(index);
-    this.setState({ data: this.state.data.splice(index) });
+    const arr = this.state.data;
+    arr.splice(index, 1);
+    this.setState({ data: arr });
   };
 
   render() {
