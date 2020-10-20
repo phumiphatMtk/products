@@ -40,7 +40,11 @@ class index extends Component {
             <Button variant="primary" className="mr-3">
               <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
             </Button>
-            <span className="num-cart">10</span>
+            {this.props.cart.length > 0 ? (
+              <span className="num-cart">{this.props.cart.length}</span>
+            ) : (
+              ""
+            )}
           </div>
           <div align="right" className="my-3">
             <Button
@@ -125,6 +129,7 @@ const mapStatetoProps = (state) => {
   return {
     counter: state.counter,
     view: state.view,
+    cart: state.cart,
   };
 };
 

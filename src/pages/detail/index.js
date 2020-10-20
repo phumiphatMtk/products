@@ -32,7 +32,7 @@ class index extends Component {
 
   decrement = () => {
     const data = this.state.data;
-    if (data.num >= 1) {
+    if (data.num > 1) {
       data.num = data.num - 1;
       this.setState({ data });
     }
