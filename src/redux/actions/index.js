@@ -29,3 +29,11 @@ export const addcart = (data) => {
     payload: data,
   };
 };
+
+export const removecart = (data) => {
+  return {
+    type: "REMOVECART",
+    payload: data,
+  };
+};
+

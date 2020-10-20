@@ -3,6 +3,7 @@ import "./cart.scss";
 import { connect } from "react-redux";
 import { Button, Container, Row, Col, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { removecart } from "../../redux/actions";
 
 class index extends Component {
   state = {
@@ -17,6 +18,8 @@ class index extends Component {
     const arr = this.state.data;
     arr.splice(index, 1);
     this.setState({ data: arr });
+
+    this.props.removeCart(arr);
   };
 
   render() {
@@ -66,7 +69,11 @@ const mapStatetoProps = (state) => {
 };
 
 const mapDispatchtoProps = (dispatch) => {
-  return {};
+  return {
+    removeCart: (data) => {
+      dispatch(removecart(data));
+    },
+  };
 };
 
 export default connect(mapStatetoProps, mapDispatchtoProps)(index);
